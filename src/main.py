@@ -3,6 +3,7 @@ from importar_vendas import importar_vendas
 from importar_industria import importar_industria
 from gerar_produtos_cotacao import gerar_produtos_cotacao
 from gerar_base_decisao_produto import gerar_base_decisao_produto
+from gerar_base_decisao_lojas import gerar_base_decisao_lojas
 
 estoque = importar_estoque(r"entrada\Estoque Opella.txt")
 vendas = importar_vendas(r"entrada\Vendas Opella.txt")
@@ -74,3 +75,18 @@ base_decisao_produto.to_excel(
 print("\n=== BASE DECISÃO PRODUTO ===")
 print(f"Produtos gerados: {len(base_decisao_produto)}")
 print(r"Arquivo criado: saida\Base_Decisao_Produto.xlsx")
+
+base_decisao_lojas = gerar_base_decisao_lojas(
+    estoque,
+    vendas,
+    industria
+)
+
+base_decisao_lojas.to_excel(
+    r"saida\Base_Decisao_Lojas.xlsx",
+    index=False
+)
+
+print("\n=== BASE DECISÃO LOJAS ===")
+print(f"Registros gerados: {len(base_decisao_lojas)}")
+print(r"Arquivo criado: saida\Base_Decisao_Lojas.xlsx")
