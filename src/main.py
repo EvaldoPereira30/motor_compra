@@ -4,6 +4,7 @@ from importar_industria import importar_industria
 from gerar_produtos_cotacao import gerar_produtos_cotacao
 from gerar_base_decisao_produto import gerar_base_decisao_produto
 from gerar_base_decisao_lojas import gerar_base_decisao_lojas
+from gerar_motor_compra import gerar_motor_compra
 
 estoque = importar_estoque(r"entrada\Estoque Opella.txt")
 vendas = importar_vendas(r"entrada\Vendas Opella.txt")
@@ -90,3 +91,18 @@ base_decisao_lojas.to_excel(
 print("\n=== BASE DECISÃO LOJAS ===")
 print(f"Registros gerados: {len(base_decisao_lojas)}")
 print(r"Arquivo criado: saida\Base_Decisao_Lojas.xlsx")
+
+motor_compra = gerar_motor_compra(
+    base_decisao_produto,
+    dias_alvo=90,
+    media_base="Media_Utilizada"
+)
+
+motor_compra.to_excel(
+    r"saida\Motor_Compra.xlsx",
+    index=False
+)
+
+print("\n=== MOTOR COMPRA ===")
+print(f"Produtos analisados: {len(motor_compra)}")
+print(r"Arquivo criado: saida\Motor_Compra.xlsx")
